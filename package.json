@@ -14,7 +14,7 @@
     "test:server": "cd server && npm run compile && npm test",
     "test": "npm run lint && npm run test:server",
     "docs": "bash ./build/update-docs.sh",
-    "postinstall": "if [[ ${NODE_ENV} != \"production\" ]]; then node ./node_modules/vscode/bin/install; fi"
+    "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "Languages"
   ],
   "engines": {
-    "vscode": "^1.18.0"
+    "vscode": "^1.19.0"
   },
   "dependencies": {
     "vscode-languageclient": "^3.4.2",
@@ -41,19 +41,14 @@
   ],
   "main": "./out/vueMain",
   "contributes": {
-    "commands": [
-      {
-        "command": "vetur.generateGrammar",
-        "title": "Vetur: Generate grammar from `vetur.grammar.customBlocks`"
-      }
-    ],
-    "breakpoints": [
-      {
-        "language": "vue"
-      }
-    ],
-    "languages": [
-      {
+    "commands": [{
+      "command": "vetur.generateGrammar",
+      "title": "Vetur: Generate grammar from `vetur.grammar.customBlocks`"
+    }],
+    "breakpoints": [{
+      "language": "vue"
+    }],
+    "languages": [{
         "id": "vue",
         "aliases": [
           "Vue",
@@ -80,8 +75,7 @@
         "configuration": "./languages/postcss-language-configuration.json"
       }
     ],
-    "grammars": [
-      {
+    "grammars": [{
         "language": "vue",
         "scopeName": "source.vue",
         "path": "./syntaxes/vue-generated.json",
