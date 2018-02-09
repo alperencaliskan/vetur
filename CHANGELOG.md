@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.11.7 | 2018-01-28
+
+- Better default scaffold template for TypeScript. #669.
+- Partial support for quoteless attribute value in HTML5. #648.
+- Fix a grammar error for custom blocks. #664.
+- Mark the `/` as `tag.end.html` in self-closing component. #650.
+- Fix a Stylus formatting issue where it adds extra parentheses. #638.
+
+### 0.11.6 | 2018-01-16
+
+- Basic Vuetify completion. #647.
+- Add auto import. #606.
+- Optimize vsix size to reduce bundle size by 33%.
+- Only read parser option for using prettier for script section. #574.
+- Fix syntax highlighting for single line, self-closing template/style/script. #591.
+- Fix "Language client is not ready yet" error. #576.
+- Fix dulplicate bracket in scaffold completion. #367.
+
 ### 0.11.5 | 2017-12-15
 
 - Fix an error incorrectly reporting `<template>` should have end tag. #578.

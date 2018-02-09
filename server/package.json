@@ -1,7 +1,7 @@
 {
   "name": "vue-language-server",
   "description": "vue-language-server",
-  "version": "0.0.28",
+  "version": "0.0.30",
   "author": "Pine Wu <octref@gmail.com>",
   "license": "MIT",
   "main": "dist/vueServerMain.js",
@@ -15,25 +15,31 @@
     "dist",
     "bin"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuejs/vetur.git"
+  },
+  "homepage": "https://github.com/vuejs/vetur/tree/master/server",
   "dependencies": {
     "bootstrap-vue-helper-json": "^1.1.1",
     "element-helper-json": "^2.0.2",
     "eslint": "^4.13.1",
-    "eslint-plugin-vue": "4.0.0-beta.2",
+    "eslint-plugin-vue": "^4.0.0",
     "js-beautify": "^1.7.5",
     "lodash": "^4.17.4",
     "parse-gitignore": "^0.4.0",
     "prettier": "^1.9.2",
     "prettier-eslint": "^8.3.1",
     "stylus": "^0.54.5",
-    "stylus-supremacy": "~2.6.1",
+    "stylus-supremacy": "~2.7.3",
     "typescript": "^2.6.2",
     "vscode-css-languageservice": "^3.0.3",
     "vscode-emmet-helper": "^1.1.19",
     "vscode-languageserver": "^3.5.0",
     "vscode-languageserver-types": "^3.5.0",
     "vscode-uri": "^1.0.1",
-    "vue-onsenui-helper-json": "^1.0.2"
+    "vue-onsenui-helper-json": "^1.0.2",
+    "vuetify-helper-json": "^1.0.0"
   },
   "devDependencies": {
     "@types/glob": "^5.0.34",

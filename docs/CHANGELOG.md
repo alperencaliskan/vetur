@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.11.7 | 2018-01-28
+
+- Better default scaffold template for TypeScript. #669.
+- Partial support for quoteless attribute value in HTML5. #648.
+- Fix a grammar error for custom blocks. #664.
+- Mark the `/` as `tag.end.html` in self-closing component. #650.
+- Fix a Stylus formatting issue where it adds extra parentheses. #638.
+
+### 0.11.6 | 2018-01-16
+
+- Basic Vuetify completion. #647.
+- Add auto import. #606.
+- Optimize vsix size to reduce bundle size by 33%.
+- Only read parser option for using prettier for script section. #574.
+- Fix syntax highlighting for single line, self-closing template/style/script. #591.
+- Fix "Language client is not ready yet" error. #576.
+- Fix dulplicate bracket in scaffold completion. #367.
+
 ### 0.11.5 | 2017-12-15
 
 - Fix an error incorrectly reporting `<template>` should have end tag. #578.
@@ -21,11 +39,11 @@
 - Always ignore `end_with_newline` option in js-beautify so the template formats properly. #544.
 
 
-### 0.11.3 | 2017-11-13 
+### 0.11.3 | 2017-11-13
 
 - Hot fix for a bug in formatting `<template>` with js-beautify where it adds `</template>` to the end. #539.
 
-### 0.11.2 | 2017-11-13 
+### 0.11.2 | 2017-11-13
 
 - Workaround a js-beautify bug which indents multi-line comment. #535.
 - Docs for generating grammar for custom blocks: https://vuejs.github.io/vetur/highlighting.html.
@@ -33,7 +51,7 @@
 - Disallow longer version of `lang` in custom block setting (`js` over `javascript`, `md` over `markdown`).
 - Pretty print generated gramamr so it's readable. (You can find it at ~/.vscode/extensions/octref.vetur-<version>./syntaxes/vue-generated.json).
 
-### 0.11.1 | 2017-11-10 
+### 0.11.1 | 2017-11-10
 
 - Syntax highlighting for Custom Block. #210.
   - Added setting `vetur.grammar.customBlocks`.

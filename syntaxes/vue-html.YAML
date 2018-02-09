@@ -1,6 +1,6 @@
 # [PackageDev] target_format: json, ext: json
 ---
-name: Vue HTML
+name: Vue Template
 scopeName: text.html.vue-html
 fileTypes: []
 uuid: ca2e4260-5d62-45bf-8cf1-d8b5cc19c8f8
@@ -120,7 +120,7 @@ patterns:
   beginCaptures:
     '1': {name: punctuation.definition.tag.begin.html}
     '2': {name: entity.name.tag.inline.any.html}
-  end: '((?: ?/)?>)'
+  end: (/?>)
   endCaptures:
     '1': {name: punctuation.definition.tag.end.html}
   patterns:
@@ -131,7 +131,7 @@ patterns:
   beginCaptures:
     '1': {name: punctuation.definition.tag.begin.html}
     '2': {name: entity.name.tag.other.html}
-  end: (>)
+  end: (/?>)
   endCaptures:
     '1': {name: punctuation.definition.tag.end.html}
   patterns:
@@ -161,7 +161,7 @@ repository:
   vue-directives:
     name: meta.directive.vue
     begin: ((?:\b(v-)|(:|@))([a-zA-Z\-]+)(?:\:([a-zA-Z\-]+))?(?:\.([a-zA-Z\-]+))*)\s*(=)
-    end: (?<='|")
+    end: (?<='|")|(?=[\s<>`])
     captures:
       '1': {name: entity.other.attribute-name.html}
       '7': {name: punctuation.separator.key-value.html}
@@ -258,6 +258,10 @@ repository:
       captures:
         '0': {name: meta.toc-list.id.html}
 
+  unquoted-attribute:
+    match: (?<==)(?:[^\s<>/'"]|/(?!>))+
+    name: string.unquoted.html
+
   tag-stuff:
     patterns:
     - include: '#vue-directives'
@@ -265,3 +269,4 @@ repository:
     - include: '#tag-generic-attribute'
     - include: '#string-double-quoted'
     - include: '#string-single-quoted'
+    - include: '#unquoted-attribute'
