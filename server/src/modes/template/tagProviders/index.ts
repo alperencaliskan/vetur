@@ -2,12 +2,20 @@ import { IHTMLTagProvider } from './common';
 import { getHTML5TagProvider } from './htmlTags';
 import { getVueTagProvider } from './vueTags';
 import { getRouterTagProvider } from './routerTags';
-import { elementTagProvider, onsenTagProvider, bootstrapTagProvider, vuetifyTagProvider } from './externalTagProviders';
+import {
+  elementTagProvider,
+  onsenTagProvider,
+  bootstrapTagProvider,
+  buefyTagProvider,
+  vuetifyTagProvider,
+  getQuasarTagProvider
+} from './externalTagProviders';
 export { getComponentTags } from './componentTags';
 export { IHTMLTagProvider } from './common';
 
 import * as ts from 'typescript';
 import * as fs from 'fs';
+import { join } from 'path';
 
 export let allTagProviders: IHTMLTagProvider[] = [
   getHTML5TagProvider(),
@@ -16,6 +24,7 @@ export let allTagProviders: IHTMLTagProvider[] = [
   elementTagProvider,
   onsenTagProvider,
   bootstrapTagProvider,
+  buefyTagProvider,
   vuetifyTagProvider
 ];
 
@@ -31,13 +40,18 @@ export function getTagProviderSettings(workspacePath: string | null | undefined)
     element: false,
     onsen: false,
     bootstrap: false,
-    vuetify: false
+    buefy: false,
+    vuetify: false,
+    quasar: false
   };
   if (!workspacePath) {
     return settings;
   }
   try {
     const packagePath = ts.findConfigFile(workspacePath, ts.sys.fileExists, 'package.json');
+    if(!packagePath) {
+      return settings;
+    }
     const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf-8'));
     if (packageJson.dependencies['vue-router']) {
       settings['router'] = true;
@@ -51,8 +65,27 @@ export function getTagProviderSettings(workspacePath: string | null | undefined)
     if (packageJson.dependencies['bootstrap-vue']) {
       settings['bootstrap'] = true;
     }
+    if (packageJson.dependencies['buefy']) {
+      settings['buefy'] = true;
+    }
     if (packageJson.dependencies['vuetify']) {
       settings['vuetify'] = true;
+    }
+
+    const quasarPath = ts.findConfigFile(
+      workspacePath,
+      ts.sys.fileExists,
+      join('node_modules', 'quasar-framework', 'package.json')
+    );
+    if (quasarPath) {
+      const quasarPkg = JSON.parse(fs.readFileSync(quasarPath, 'utf-8'));
+      if (quasarPkg.vetur) {
+        const provider = getQuasarTagProvider(workspacePath, quasarPkg);
+        if (provider !== null) {
+          allTagProviders.push(provider);
+          settings['quasar'] = true;
+        }
+      }
     }
   } catch (e) {}
   return settings;

@@ -3,14 +3,21 @@ import { isEmptyElement } from '../tagProviders/htmlTags';
 import { TextDocument } from 'vscode-languageserver-types';
 
 export class Node {
-  public tag: string;
-  public closed: boolean;
-  public endTagStart: number;
-  public attributes: { [name: string]: string };
+  public tag?: string;
+  public closed?: boolean;
+  public endTagStart?: number;
+  public isInterpolation: boolean;
+  public attributes?: { [name: string]: string };
   public get attributeNames(): string[] {
-    return Object.keys(this.attributes);
+    if(this.attributes) {
+      return Object.keys(this.attributes);
+    }
+
+    return [];
   }
-  constructor(public start: number, public end: number, public children: Node[], public parent: Node) {}
+  constructor(public start: number, public end: number, public children: Node[], public parent: Node) {
+    this.isInterpolation = false;
+  }
   public isSameTag(tagInLowerCase: string) {
     return (
       this.tag &&
@@ -70,7 +77,7 @@ export function parse(text: string): HTMLDocument {
   let endTagStart = -1;
   let pendingAttribute = '';
   let token = scanner.scan();
-  let attributes: { [k: string]: string } = {};
+  let attributes: { [k: string]: string } | undefined = {};
   while (token !== TokenType.EOS) {
     switch (token) {
       case TokenType.StartTagOpen:
@@ -115,6 +122,18 @@ export function parse(text: string): HTMLDocument {
           curr.end = scanner.getTokenEnd();
           curr = curr.parent;
         }
+        break;
+      case TokenType.StartInterpolation: {
+        const child = new Node(scanner.getTokenOffset(), text.length, [], curr);
+        child.isInterpolation = true;
+        curr.children.push(child);
+        curr = child;
+        break;
+      }
+      case TokenType.EndInterpolation:
+        curr.end = scanner.getTokenEnd();
+        curr.closed = true;
+        curr = curr.parent;
         break;
       case TokenType.AttributeName:
         pendingAttribute = scanner.getTokenText();

@@ -1,5 +1,61 @@
 # Changelog
 
+### 0.13.0 | 2018-10-04
+
+- Revert TS to 2.8.4, which is the same minor version as 0.12.6 release for perf issues. #913.
+- [prettyhtml](https://github.com/Prettyhtml/prettyhtml) support. Thanks to contribution from [@StarpTech](https://github.com/StarpTech). #561 and #491.
+- Default `unformatted` option to an empty array to accommodate js-beautify's new behavior. #921.
+- Fix a stylus formatting error when stylus code contains comments. Thanks to contribution from [@ThisIsManta](https://github.com/ThisIsManta). #918.
+- If local prettier exists in `node_modules`, prefer using it instead of bundled version of prettier. Thanks to contribution from [@maeldur](https://github.com/maeldur). #876.
+
+### 0.12.7 | 2018-09-24
+
+- Fix a oversized publish that's 200MB (normal publish should be around 30MB). #898.
+- Add completion for [Quasar Framework](https://github.com/vuejs/vetur/pull/865). Thanks to contribution from [@rstoenescu](https://github.com/rstoenescu). #865.
+- Many dependency upgrade, including `vscode-languageserver`, `vscode-languageclient` from V3 to V5, `js-beautify` to 1.8.6, `prettier` to 1.14.3, etc.
+- More test coverage. #863.
+
+### 0.12.6 | 2018-08-06
+
+- Revert embedded pug languageId to jade, so Cmd+/ uses `//-` for comment. #840.
+- Fix syntax highlight for `:snake_case` properties in HTML. Thanks to contribution from [@davidhewitt](https://github.com/davidhewitt). #830.
+- Auto completion for [Buefy](https://buefy.github.io) framework. Thanks to contribution from [@jtommy](https://github.com/jtommy). #824.
+- Fix description for `v-cloak`. Thanks to contribution by [@snkashis](https://github.com/snkashis). #816.
+
+### 0.12.5 | 2018-06-06
+
+- Use `source.js#expression` for Vue interpolation values. Fix #811 and #804
+- Fix a pug syntax highlighting issue. #812
+
+### 0.12.4 | 2018-06-05
+
+- Improved file watching that updates completion and diagnostics in Vue files when TS/JS file changes. #355
+
+### 0.12.3 | 2018-05-17
+
+- Removed chokidar watcher.
+
+### 0.12.2 | 2018-05-17
+
+- Temporarily disable file watcher for perf problem & will bring it back in next version. #789.
+
+### 0.12.1 | 2018-05-14
+
+- Haml syntax highlighting. #739.
+- Remove restricted file schemes for live share.
+- Fix an issue where Vetur failed to read emmet configs and cause emmet and other completions to fail.
+
+### 0.11.8 | 2018-05-14
+
+- Update TypeScript Version to allow usage of `!` for definite assignment assertions.
+- Add single quote as trigger character. Fix #743
+- Add `arrowParens` option for Prettier
+- Upgrade vscode-emmet-helper. Fix #412. Fix #426
+- Add `vetur.completion.useScaffoldSnippets`. Fix #698
+- Skip template completion trigger in script. Fix #705
+- Fix script definition lookup position error. Fix #741
+- Add a crude file watcher. Now Vetur will pick up text change in TS/JS. Note this feature is experimental. Partially fix #355
+
 ### 0.11.7 | 2018-01-28
 
 - Better default scaffold template for TypeScript. #669.
@@ -39,11 +95,11 @@
 - Always ignore `end_with_newline` option in js-beautify so the template formats properly. #544.
 
 
-### 0.11.3 | 2017-11-13
+### 0.11.3 | 2017-11-13 
 
 - Hot fix for a bug in formatting `<template>` with js-beautify where it adds `</template>` to the end. #539.
 
-### 0.11.2 | 2017-11-13
+### 0.11.2 | 2017-11-13 
 
 - Workaround a js-beautify bug which indents multi-line comment. #535.
 - Docs for generating grammar for custom blocks: https://vuejs.github.io/vetur/highlighting.html.
@@ -51,7 +107,7 @@
 - Disallow longer version of `lang` in custom block setting (`js` over `javascript`, `md` over `markdown`).
 - Pretty print generated gramamr so it's readable. (You can find it at ~/.vscode/extensions/octref.vetur-<version>./syntaxes/vue-generated.json).
 
-### 0.11.1 | 2017-11-10
+### 0.11.1 | 2017-11-10 
 
 - Syntax highlighting for Custom Block. #210.
   - Added setting `vetur.grammar.customBlocks`.
